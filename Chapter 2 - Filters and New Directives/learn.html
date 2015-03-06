@@ -1,0 +1,117 @@
+<!doctype html>
+<html ng-app="store">
+  <head>
+    <title>My Angular App</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+   <body ng-controller="StoreController as store">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="product in store.products">
+        <h3>
+          {{product.name}}
+          <!-- you can display a currency keyword filter -->
+          <em class="pull-right">{{product.price | currency}}</em>
+          <img ng-src="{{product.images[0].full}}"/>
+        </h3>
+      </li>
+    </ul>
+
+    <section ng-controller="PanelController as panel">
+      <ul class="nav nav-pills">
+        <li ng-class="{ active:tab === 1 }">
+          <a href ng-click="tab = 1">Description</a>
+        </li>
+        <li ng-class="{ active:tab === 2 }">
+          <a href ng-click="tab = 2">Specifications</a>
+        </li>
+        <li ng-class="{ active:tab === 3 } ">
+          <a href ng-click="tab = 3">Reviews </a>
+        </li>
+      </ul>
+      <div class="panel" ng-show="tab === 1">
+        <h4> Description </h4>
+        <p>{{product.description}}</p>
+      </div>
+    </section>
+
+    We can clean up the views this way
+
+    <section ng-controller="PanelController as panel">
+      <ul class="nav nav-pills">
+        <li ng-class="{ active: panel.isSelected(1) }">
+          <a href ng-click="panel.selectTab(1)">Description</a>
+          <p>{{product.description}}
+        </li>
+        <li ng-class="{ active: panel.isSelected(2) }">
+          <a href ng-click="panel.selectTab(2)">Specifications</a>
+        </li>
+        <li ng-class="{ active: panel.isSelected(3) } ">
+          <a href ng-click="panel.selectTab(3)">Reviews </a>
+        </li>
+      </ul>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+  </body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body class="list-group" ng-controller="StoreController as store">
+    <header>
+      <h1 class="text-center">Flatlander Crafted Gems</h1>
+      <h2 class="text-center">– an Angular store –</h2>
+    </header>
+    <div class="list-group-item" ng-repeat="product in store.products">
+      <h3>
+        {{product.name}}
+        <em class="pull-right">{{product.price | currency}}</em>
+      </h3>
+      <section ng-show="product.images.length">
+        <img ng-src="{{product.images[0]}}" />
+        <ul class="list-inline thumbs">
+          <li class="thumbnail" ng-repeat="image in product.images">
+            <img ng-src="{{image}}" />
+          </li>
+        </ul>
+      </section>
+
+      <section class="tab" ng-controller="TabController as tab">
+        <ul class="nav nav-pills">
+          <li>
+            <a href ng-click="tab.setTab(1)">Description</a></li>
+          <li>
+            <a href ng-click="tab.setTab(2)">Specs</a></li>
+          <li>
+            <a href ng-click="tab.setTab(3)">Reviews</a></li>
+        </ul>
+        <div ng-show="tab.isSet(1)">
+          <h4>Description</h4>
+          <blockquote></blockquote>
+        </div>
+        <div ng-show="tab.isSet(2)">
+          <h4>Specs</h4>
+          <blockquote>Shine: </blockquote>
+        </div>
+        <div ng-show="tab.isSet(3)">
+          <h4>Reviews</h4>
+          <blockquote></blockquote>
+        </div>
+      </section>
+    </div>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
+ -->
